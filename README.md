@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Learning Path Generator
 
 An AI-powered personalized learning path generator that creates customized learning roadmaps based on individual user profiles, goals, and constraints.
@@ -135,3 +136,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Built following spec-driven development methodology
 - Implements correctness properties for reliable software
 - Uses property-based testing for comprehensive validation
+=======
+# AI-powered-personalized-learning-path-generator
+An AI-powered personalized learning path generator designed to recommend adaptive learning journeys based on individual learner goals and skill gaps.
+>>>>>>> 320492e3e266298afad2f87e779105f72c8c3ffa
