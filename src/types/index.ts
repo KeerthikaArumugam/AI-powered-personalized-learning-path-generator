@@ -96,6 +96,131 @@ export interface ProgressRecord {
   lastActivity: Date;
 }
 
+// Authentication types
+export interface User {
+  id: string;
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  avatar?: string;
+  lastLogin: Date;
+  createdAt: Date;
+}
+
+export interface LoginCredentials {
+  emailOrUsername: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+export interface AuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+}
+
+// Authentication types
+export interface User {
+  id: string;
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  avatar?: string;
+  lastLogin?: Date;
+  createdAt: Date;
+}
+
+export interface LoginCredentials {
+  emailOrUsername: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+export interface AuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+}
+
+// Authentication types
+export interface User {
+  id: string;
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  avatar?: string;
+  lastLogin?: Date;
+  createdAt: Date;
+}
+
+export interface LoginCredentials {
+  emailOrUsername: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+export interface AuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+}
+
+// Authentication types
+export interface User {
+  id: string;
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  avatar?: string;
+  lastLogin: Date;
+  createdAt: Date;
+}
+
+export interface LoginCredentials {
+  emailOrUsername: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+export interface AuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+}
+
+// Authentication types
+export interface User {
+  id: string;
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  avatar?: string;
+  lastLogin: Date;
+  createdAt: Date;
+}
+
+export interface LoginCredentials {
+  emailOrUsername: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+export interface AuthState {
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+}
+
 // Form validation types
 export interface ValidationError {
   field: string;
