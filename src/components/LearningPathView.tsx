@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { UserProfile, LearningPath, LearningPhase } from '../types'
-import { Clock, Target, BookOpen, CheckCircle, Circle, ArrowRight } from 'lucide-react'
 import SkillGapAnalysis from './SkillGapAnalysis'
 import PhaseCard from './PhaseCard'
 import ResourceList from './ResourceList'
@@ -16,7 +15,7 @@ const LearningPathView = ({ profile, learningPath }: LearningPathViewProps) => {
   if (!profile || !learningPath) {
     return (
       <div className="text-center py-12">
-        <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+        <div className="text-5xl mx-auto mb-4">📚</div>
         <h2 className="text-2xl font-semibold text-gray-900 mb-2">
           No Learning Path Generated
         </h2>
@@ -40,15 +39,15 @@ const LearningPathView = ({ profile, learningPath }: LearningPathViewProps) => {
         
         <div className="flex justify-center space-x-8 text-sm">
           <div className="flex items-center space-x-2">
-            <Clock className="h-5 w-5 text-primary-600" />
+            <span>⏱️</span>
             <span>{learningPath.estimatedDuration} weeks</span>
           </div>
           <div className="flex items-center space-x-2">
-            <Target className="h-5 w-5 text-primary-600" />
+            <span>🎯</span>
             <span>{learningPath.phases.length} phases</span>
           </div>
           <div className="flex items-center space-x-2">
-            <BookOpen className="h-5 w-5 text-primary-600" />
+            <span>📚</span>
             <span>
               {learningPath.phases.reduce((sum, phase) => sum + phase.resources.length, 0)} resources
             </span>
@@ -108,11 +107,7 @@ const LearningPathView = ({ profile, learningPath }: LearningPathViewProps) => {
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     index === 0 ? 'bg-primary-600 text-white' : 'bg-gray-200 text-gray-600'
                   }`}>
-                    {index === 0 ? (
-                      <CheckCircle className="h-6 w-6" />
-                    ) : (
-                      <Circle className="h-6 w-6" />
-                    )}
+                    {index === 0 ? '✔️' : '○'}
                   </div>
                 </div>
                 
@@ -121,9 +116,7 @@ const LearningPathView = ({ profile, learningPath }: LearningPathViewProps) => {
                     <h3 className="text-lg font-semibold text-gray-900">
                       Phase {index + 1}: {phase.title}
                     </h3>
-                    <ArrowRight className={`h-5 w-5 transition-transform ${
-                      selectedPhase?.id === phase.id ? 'rotate-90' : ''
-                    }`} />
+                    <span className={`transition-transform ${selectedPhase?.id === phase.id ? 'rotate-90' : ''}`}>➔</span>
                   </div>
                   
                   <div className="flex items-center space-x-4 mt-2 text-sm text-gray-600">

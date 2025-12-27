@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom'
-import { BookOpen, Home, Library, GitBranch as RouteIcon, BarChart3, Info, Mail, Moon, Sun, Menu } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useI18n } from '../contexts/I18nContext'
 
@@ -26,13 +25,17 @@ const Header = () => {
   }
 
   const navItems = [
-    { path: '/', label: t('nav_home'), icon: Home },
-    { path: '/generator', label: t('nav_generator'), icon: BookOpen },
-    { path: '/library', label: t('nav_library'), icon: Library },
-    { path: '/results', label: t('nav_results'), icon: RouteIcon },
-    { path: '/progress', label: t('nav_progress'), icon: BarChart3 },
-    { path: '/about', label: t('nav_about'), icon: Info },
-    { path: '/contact', label: t('nav_contact'), icon: Mail },
+    { path: '/', label: t('nav_home') },
+    { path: '/generator', label: t('nav_generator') },
+    { path: '/library', label: t('nav_library') },
+    { path: '/results', label: t('nav_results') },
+    { path: '/progress', label: t('nav_progress') },
+    { path: '/retention', label: t('nav_retention') },
+    { path: '/reflection', label: t('nav_reflection') },
+    { path: '/analyzer', label: t('nav_analyzer') },
+    { path: '/labs', label: t('nav_labs') },
+    { path: '/about', label: t('nav_about') },
+    { path: '/contact', label: t('nav_contact') },
   ]
 
   return (
@@ -40,14 +43,14 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
-            <BookOpen className="h-8 w-8 text-primary-600" />
+            <span className="text-2xl">📘</span>
             <h1 className="text-xl font-bold text-gray-900 dark:text-white">
               {t('app_title')}
             </h1>
           </div>
           
           <div className="hidden md:flex items-center space-x-1">
-            {navItems.map(({ path, label, icon: Icon }) => (
+            {navItems.map(({ path, label }) => (
               <Link
                 key={path}
                 to={path}
@@ -57,7 +60,6 @@ const Header = () => {
                     : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-800'
                 }`}
               >
-                <Icon className="h-4 w-4" />
                 <span>{label}</span>
               </Link>
             ))}
@@ -69,7 +71,7 @@ const Header = () => {
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
             >
-              {dark ? <Sun className="h-5 w-5 text-yellow-400" /> : <Moon className="h-5 w-5 text-gray-600" />}
+              <span className="text-lg">{dark ? '🌞' : '🌙'}</span>
             </button>
             <select
               aria-label="Language"
@@ -85,14 +87,14 @@ const Header = () => {
               aria-label="Open menu"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
             >
-              <Menu className="h-5 w-5 text-gray-600 dark:text-gray-200" />
+              <span className="text-lg">☰</span>
             </button>
           </div>
         </div>
         
         {isMobileOpen && (
           <nav className="md:hidden py-2 space-y-1">
-            {navItems.map(({ path, label, icon: Icon }) => (
+            {navItems.map(({ path, label }) => (
               <Link
                 key={path}
                 to={path}
@@ -103,7 +105,6 @@ const Header = () => {
                     : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-800'
                 }`}
               >
-                <Icon className="h-4 w-4" />
                 <span>{label}</span>
               </Link>
             ))}

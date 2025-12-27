@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { UserProfile, LearningPath, ProgressRecord } from '../types'
-import { BarChart3, Clock, Target, Award } from 'lucide-react'
 
 interface ProgressDashboardProps {
   profile: UserProfile | null
@@ -27,7 +26,7 @@ const ProgressDashboard = ({ profile, learningPath }: ProgressDashboardProps) =>
   if (!profile || !learningPath || !progress) {
     return (
       <div className="text-center py-12">
-        <BarChart3 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+        <div className="text-4xl mb-4">📈</div>
         <h2 className="text-2xl font-semibold text-gray-900 mb-2">
           No Progress Data
         </h2>
@@ -123,18 +122,9 @@ const ProgressDashboard = ({ profile, learningPath }: ProgressDashboardProps) =>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-              <div className="flex items-center space-x-2">
-                <Clock className="h-4 w-4 text-gray-500" />
-                <span className="text-sm">{currentPhase.estimatedTime} hours</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Target className="h-4 w-4 text-gray-500" />
-                <span className="text-sm">Difficulty: {currentPhase.difficultyLevel}/10</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Award className="h-4 w-4 text-gray-500" />
-                <span className="text-sm">{currentPhase.milestones.length} milestones</span>
-              </div>
+              <div className="flex items-center space-x-2"><span>⏱️</span><span className="text-sm">{currentPhase.estimatedTime} hours</span></div>
+              <div className="flex items-center space-x-2"><span>🎯</span><span className="text-sm">Difficulty: {currentPhase.difficultyLevel}/10</span></div>
+              <div className="flex items-center space-x-2"><span>🏅</span><span className="text-sm">{currentPhase.milestones.length} milestones</span></div>
             </div>
 
             {/* Phase Milestones */}
@@ -227,7 +217,7 @@ const ProgressDashboard = ({ profile, learningPath }: ProgressDashboardProps) =>
             </div>
           ) : (
             <div className="text-center py-4">
-              <Award className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
+              <div className="text-3xl mb-2">🏅</div>
               <p className="text-sm text-gray-600">
                 You're on the final phase! Keep going!
               </p>

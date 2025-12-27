@@ -12,8 +12,12 @@ const dictionaries: Record<Lang, Dict> = {
     nav_library: 'Skill Library',
     nav_results: 'Roadmap Results',
     nav_progress: 'Progress',
+    nav_retention: 'Retention Checker',
+    nav_reflection: 'Reflection Feedback',
     nav_about: 'About',
     nav_contact: 'Contact',
+    nav_analyzer: 'Difficulty Analyzer',
+    nav_labs: 'Labs',
     dark: 'Dark',
     light: 'Light',
   },
@@ -24,8 +28,12 @@ const dictionaries: Record<Lang, Dict> = {
     nav_library: 'Biblioteca de Habilidades',
     nav_results: 'Resultados',
     nav_progress: 'Progreso',
+    nav_retention: 'Verificador de Retención',
+    nav_reflection: 'Retroalimentación de Reflexión',
     nav_about: 'Acerca de',
     nav_contact: 'Contacto',
+    nav_analyzer: 'Analizador de Dificultad',
+    nav_labs: 'Laboratorio',
     dark: 'Oscuro',
     light: 'Claro',
   },
@@ -66,4 +74,3 @@ export const useI18n = () => {
   if (!ctx) throw new Error('useI18n must be used within I18nProvider')
   return ctx
 }
-

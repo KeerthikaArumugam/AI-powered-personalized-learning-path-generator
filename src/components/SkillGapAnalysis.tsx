@@ -1,5 +1,4 @@
 import { SkillGap } from '../types'
-import { TrendingUp, AlertCircle, CheckCircle } from 'lucide-react'
 
 interface SkillGapAnalysisProps {
   skillGaps: SkillGap[]
@@ -16,9 +15,9 @@ const SkillGapAnalysis = ({ skillGaps }: SkillGapAnalysisProps) => {
 
   const getPriorityIcon = (priority: SkillGap['priority']) => {
     switch (priority) {
-      case 'high': return <AlertCircle className="h-4 w-4" />
-      case 'medium': return <TrendingUp className="h-4 w-4" />
-      case 'low': return <CheckCircle className="h-4 w-4" />
+      case 'high': return '⚠️'
+      case 'medium': return '📈'
+      case 'low': return '✅'
     }
   }
 
@@ -27,7 +26,7 @@ const SkillGapAnalysis = ({ skillGaps }: SkillGapAnalysisProps) => {
       <div className="card">
         <h2 className="text-xl font-semibold mb-4">Skill Gap Analysis</h2>
         <div className="text-center py-8">
-          <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+          <div className="text-4xl text-green-500 mx-auto mb-4">✅</div>
           <p className="text-gray-600">
             Great! No significant skill gaps identified. Consider exploring advanced topics.
           </p>

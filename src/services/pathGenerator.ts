@@ -39,6 +39,60 @@ export const generateLearningPath = async (profile: UserProfile): Promise<Learni
   return learningPath
 }
 
+export type Recommendation = {
+  id: string
+  topic: string
+  why: string[]
+  dependencies: string[]
+  outcome: string
+  confidence: number
+}
+
+export const generateRecommendations = (learningPath?: LearningPath | null): Recommendation[] => {
+  const base: Recommendation[] = [
+    {
+      id: 'rec-1',
+      topic: 'React State Management',
+      why: [
+        'Confusion between props and state in recent activities',
+        'Async updates handling needs reinforcement',
+      ],
+      dependencies: ['JavaScript ES6', 'React Basics'],
+      outcome: 'Manage complex UI state confidently',
+      confidence: 0.82,
+    },
+    {
+      id: 'rec-2',
+      topic: 'Responsive Layouts',
+      why: [
+        'Mobile layout issues observed in projects',
+        'Underuse of responsive utilities',
+      ],
+      dependencies: ['HTML Semantics', 'CSS Flexbox/Grid'],
+      outcome: 'Build layouts that adapt to screen sizes smoothly',
+      confidence: 0.76,
+    },
+    {
+      id: 'rec-3',
+      topic: 'Async Data Fetching',
+      why: [
+        'Error handling gaps in API exercises',
+        'Limited use of loading/error states',
+      ],
+      dependencies: ['Promises', 'Fetch/Axios', 'Error Handling'],
+      outcome: 'Implement robust data flows with clear states',
+      confidence: 0.79,
+    },
+  ]
+  if (!learningPath) return base
+  const topicNames = learningPath.phases.flatMap(p => p.topics.map(t => t.name.toLowerCase()))
+  const adjust = (rec: Recommendation): Recommendation => {
+    const hit = topicNames.some(n => rec.topic.toLowerCase().includes(n.split(' ')[0]))
+    return { ...rec, confidence: Math.min(0.95, hit ? rec.confidence + 0.05 : rec.confidence) }
+  }
+  return base.map(adjust)
+}
+
 const analyzeSkillGaps = (profile: UserProfile): SkillGap[] => {
   const gaps: SkillGap[] = []
   

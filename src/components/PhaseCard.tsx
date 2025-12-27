@@ -1,5 +1,4 @@
 import { LearningPhase } from '../types'
-import { X, Clock, Target, BookOpen, CheckSquare } from 'lucide-react'
 
 interface PhaseCardProps {
   phase: LearningPhase
@@ -11,37 +10,20 @@ const PhaseCard = ({ phase, onClose }: PhaseCardProps) => {
     <div className="card">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-semibold">{phase.title}</h2>
-        <button
-          onClick={onClose}
-          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-        >
-          <X className="h-5 w-5" />
-        </button>
+        <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">✕</button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Phase Overview */}
         <div className="lg:col-span-1">
           <div className="space-y-4">
-            <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <Clock className="h-4 w-4" />
-              <span>{phase.estimatedTime} hours</span>
-            </div>
+            <div className="flex items-center space-x-2 text-sm text-gray-600"><span>⏱️</span><span>{phase.estimatedTime} hours</span></div>
             
-            <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <Target className="h-4 w-4" />
-              <span>Difficulty: {phase.difficultyLevel}/10</span>
-            </div>
+            <div className="flex items-center space-x-2 text-sm text-gray-600"><span>🎯</span><span>Difficulty: {phase.difficultyLevel}/10</span></div>
             
-            <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <BookOpen className="h-4 w-4" />
-              <span>{phase.resources.length} resources</span>
-            </div>
+            <div className="flex items-center space-x-2 text-sm text-gray-600"><span>📚</span><span>{phase.resources.length} resources</span></div>
             
-            <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <CheckSquare className="h-4 w-4" />
-              <span>{phase.assessments.length} assessments</span>
-            </div>
+            <div className="flex items-center space-x-2 text-sm text-gray-600"><span>✅</span><span>{phase.assessments.length} assessments</span></div>
           </div>
         </div>
 

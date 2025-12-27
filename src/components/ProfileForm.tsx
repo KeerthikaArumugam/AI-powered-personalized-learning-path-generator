@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { UserProfile, LearningGoal, TimeConstraints, ValidationError, LearningPath } from '../types'
 import { validateProfile } from '../services/validation'
 import { generateLearningPath } from '../services/pathGenerator'
-import { ArrowRight, Plus, X } from 'lucide-react'
 
 interface ProfileFormProps {
   onProfileComplete: (profile: UserProfile) => void
@@ -165,8 +164,7 @@ const ProfileForm = ({ onProfileComplete, onPathGenerated }: ProfileFormProps) =
                 onClick={addSkill}
                 className="btn-secondary flex items-center gap-2"
               >
-                <Plus className="h-4 w-4" />
-                Add
+                ＋ Add
               </button>
               <button
                 type="button"
@@ -201,7 +199,7 @@ const ProfileForm = ({ onProfileComplete, onPathGenerated }: ProfileFormProps) =
                       onClick={() => removeSkill(skill)}
                       className="hover:text-primary-900"
                     >
-                      <X className="h-3 w-3" />
+                      ✕
                     </button>
                   </span>
                 ))}
@@ -269,8 +267,7 @@ const ProfileForm = ({ onProfileComplete, onPathGenerated }: ProfileFormProps) =
                   onClick={addCompetency}
                   className="btn-secondary flex items-center gap-2"
                 >
-                  <Plus className="h-4 w-4" />
-                  Add
+                  ＋ Add
                 </button>
               </div>
               
@@ -287,7 +284,7 @@ const ProfileForm = ({ onProfileComplete, onPathGenerated }: ProfileFormProps) =
                         onClick={() => removeCompetency(competency)}
                         className="hover:text-green-900"
                       >
-                        <X className="h-3 w-3" />
+                        ✕
                       </button>
                     </span>
                   ))}
@@ -431,7 +428,7 @@ const ProfileForm = ({ onProfileComplete, onPathGenerated }: ProfileFormProps) =
             ) : (
               <>
                 Generate Learning Path
-                <ArrowRight className="h-5 w-5" />
+                →
               </>
             )}
           </button>

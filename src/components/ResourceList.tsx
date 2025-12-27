@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Resource, UserProfile } from '../types'
-import { Filter, Clock, BarChart3, ExternalLink } from 'lucide-react'
 
 interface ResourceListProps {
   resources: Resource[]
@@ -81,7 +80,7 @@ const ResourceList = ({ resources, learningStyle }: ResourceListProps) => {
         <div className="flex items-center space-x-4">
           {/* Filter */}
           <div className="flex items-center space-x-2">
-            <Filter className="h-4 w-4 text-gray-500" />
+            <span className="text-gray-500">🔍</span>
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value as Resource['type'] | 'all')}
@@ -142,14 +141,8 @@ const ResourceList = ({ resources, learningStyle }: ResourceListProps) => {
 
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
-              <div className="flex items-center space-x-1">
-                <Clock className="h-3 w-3" />
-                <span>{resource.estimatedTime} min</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <BarChart3 className="h-3 w-3" />
-                <span>Level {resource.difficultyLevel}/10</span>
-              </div>
+              <div className="flex items-center space-x-1"><span>⏱️</span><span>{resource.estimatedTime} min</span></div>
+              <div className="flex items-center space-x-1"><span>📈</span><span>Level {resource.difficultyLevel}/10</span></div>
             </div>
 
             {/* Learning Styles */}
@@ -172,7 +165,7 @@ const ResourceList = ({ resources, learningStyle }: ResourceListProps) => {
             <div className="flex items-center gap-2">
               <button className="flex-1 btn-primary text-sm py-2 flex items-center justify-center space-x-1">
                 <span>Start Learning</span>
-                <ExternalLink className="h-3 w-3" />
+                <span>🔗</span>
               </button>
               <button
                 aria-label="Bookmark"
