@@ -10,6 +10,14 @@ interface ResourceListProps {
 const ResourceList = ({ resources, learningStyle }: ResourceListProps) => {
   const [filterType, setFilterType] = useState<Resource['type'] | 'all'>('all')
   const [sortBy, setSortBy] = useState<'time' | 'difficulty' | 'relevance'>('relevance')
+  const [bookmarks, setBookmarks] = useState<Record<string, boolean>>(() => {
+    try {
+      const raw = localStorage.getItem('bookmarks')
+      return raw ? JSON.parse(raw) : {}
+    } catch {
+      return {}
+    }
+  })
 
   const getResourceIcon = (type: Resource['type']) => {
     switch (type) {
@@ -57,6 +65,14 @@ const ResourceList = ({ resources, learningStyle }: ResourceListProps) => {
   })
 
   const resourceTypes = Array.from(new Set(resources.map(r => r.type)))
+  
+  const toggleBookmark = (id: string) => {
+    setBookmarks(prev => {
+      const next = { ...prev, [id]: !prev[id] }
+      localStorage.setItem('bookmarks', JSON.stringify(next))
+      return next
+    })
+  }
 
   return (
     <div className="card">
@@ -153,10 +169,23 @@ const ResourceList = ({ resources, learningStyle }: ResourceListProps) => {
             </div>
 
             {/* Action Button */}
-            <button className="w-full btn-primary text-sm py-2 flex items-center justify-center space-x-1">
-              <span>Start Learning</span>
-              <ExternalLink className="h-3 w-3" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button className="flex-1 btn-primary text-sm py-2 flex items-center justify-center space-x-1">
+                <span>Start Learning</span>
+                <ExternalLink className="h-3 w-3" />
+              </button>
+              <button
+                aria-label="Bookmark"
+                onClick={() => toggleBookmark(resource.id)}
+                className={`px-3 py-2 rounded-lg border text-sm ${
+                  bookmarks[resource.id] 
+                    ? 'bg-yellow-100 border-yellow-200 text-yellow-800' 
+                    : 'bg-gray-100 border-gray-200 text-gray-700'
+                }`}
+              >
+                {bookmarks[resource.id] ? '★' : '☆'}
+              </button>
+            </div>
           </div>
         ))}
       </div>

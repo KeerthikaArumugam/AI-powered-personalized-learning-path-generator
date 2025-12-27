@@ -9,24 +9,7 @@ import {
   Assessment 
 } from '../types'
 
-// Mock knowledge base for demonstration
-const knowledgeBase = {
-  'web-development': {
-    prerequisites: [],
-    topics: ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js'],
-    estimatedHours: 120
-  },
-  'data-science': {
-    prerequisites: [],
-    topics: ['Python', 'Statistics', 'Pandas', 'Machine Learning', 'Data Visualization'],
-    estimatedHours: 150
-  },
-  'mobile-development': {
-    prerequisites: ['programming-basics'],
-    topics: ['React Native', 'Flutter', 'iOS Development', 'Android Development'],
-    estimatedHours: 100
-  }
-}
+// Placeholder for future knowledge base integration
 
 export const generateLearningPath = async (profile: UserProfile): Promise<LearningPath> => {
   // Simulate API delay

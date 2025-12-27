@@ -63,6 +63,18 @@ const PhaseCard = ({ phase, onClose }: PhaseCardProps) => {
                     </span>
                   ))}
                 </div>
+                <div className="mt-3">
+                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                    Notes
+                  </label>
+                  <textarea
+                    defaultValue={localStorage.getItem(`topic-notes-${topic.id}`) || ''}
+                    onBlur={(e) => localStorage.setItem(`topic-notes-${topic.id}`, e.target.value)}
+                    className="input-field"
+                    rows={3}
+                    placeholder="Write your notes or key takeaways..."
+                  />
+                </div>
               </div>
             ))}
           </div>

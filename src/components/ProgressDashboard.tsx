@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { UserProfile, LearningPath, ProgressRecord } from '../types'
-import { BarChart3, Clock, Target, TrendingUp, Award, Calendar } from 'lucide-react'
+import { BarChart3, Clock, Target, Award } from 'lucide-react'
 
 interface ProgressDashboardProps {
   profile: UserProfile | null

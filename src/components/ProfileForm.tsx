@@ -89,7 +89,7 @@ const ProfileForm = ({ onProfileComplete, onPathGenerated }: ProfileFormProps) =
       
       onProfileComplete(profile)
       onPathGenerated(path)
-      navigate('/learning-path')
+      navigate('/results')
     } catch (error) {
       setErrors([{ field: 'general', message: 'Failed to generate learning path. Please try again.' }])
     } finally {
@@ -167,6 +167,24 @@ const ProfileForm = ({ onProfileComplete, onPathGenerated }: ProfileFormProps) =
               >
                 <Plus className="h-4 w-4" />
                 Add
+              </button>
+              <button
+                type="button"
+                aria-label="Voice input"
+                onClick={() => {
+                  const SR: any = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+                  if (!SR) return
+                  const recognition = new SR()
+                  recognition.lang = 'en-US'
+                  recognition.onresult = (event: any) => {
+                    const text = event.results[0][0].transcript
+                    setNewSkill(text)
+                  }
+                  recognition.start()
+                }}
+                className="btn-secondary"
+              >
+                🎤
               </button>
             </div>
             
@@ -312,6 +330,22 @@ const ProfileForm = ({ onProfileComplete, onPathGenerated }: ProfileFormProps) =
                 <option value="moderate">Moderate</option>
                 <option value="fast">Fast Track</option>
               </select>
+            </div>
+            
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Learning Mode
+              </label>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {['Beginner', 'Intermediate', 'Fast-Track', 'Career Switch'].map((mode) => (
+                  <div key={mode} className="p-3 border rounded-lg text-center">
+                    <span className="text-sm text-gray-700">{mode}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-gray-500 mt-2">
+                Mode influences recommendations and pacing.
+              </p>
             </div>
           </div>
         </div>

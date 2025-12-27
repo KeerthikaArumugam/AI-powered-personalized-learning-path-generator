@@ -59,6 +59,31 @@ const LearningPathView = ({ profile, learningPath }: LearningPathViewProps) => {
       {/* Skill Gap Analysis */}
       <SkillGapAnalysis skillGaps={learningPath.skillGapAnalysis} />
 
+      {/* Weekly Study Plan */}
+      <div className="card">
+        <h2 className="text-2xl font-semibold mb-4">Weekly Study Plan</h2>
+        <p className="text-sm text-gray-600 mb-4">
+          Plan generated based on your availability: {profile.timeConstraints.availableTimePerWeek} minutes/week
+        </p>
+        <div className="space-y-3">
+          {Array.from({ length: learningPath.estimatedDuration }).map((_, weekIndex) => {
+            const weekHours = Math.round(profile.timeConstraints.availableTimePerWeek / 60)
+            const phase = learningPath.phases[Math.min(weekIndex, learningPath.phases.length - 1)]
+            return (
+              <div key={weekIndex} className="border rounded-lg p-3">
+                <div className="flex items-center justify-between">
+                  <div className="font-medium">Week {weekIndex + 1}</div>
+                  <div className="text-sm text-gray-500">{weekHours}h available</div>
+                </div>
+                <div className="text-sm text-gray-600 mt-1">
+                  Focus: {phase.title} • Targets: {phase.milestones.slice(0, 2).map(m => m.title).join(', ')}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
       {/* Learning Path Overview */}
       <div className="card">
         <h2 className="text-2xl font-semibold mb-6">Learning Roadmap</h2>
@@ -152,7 +177,10 @@ const LearningPathView = ({ profile, learningPath }: LearningPathViewProps) => {
             </div>
           </button>
           
-          <button className="btn-secondary text-left p-4 h-auto">
+          <button 
+            className="btn-secondary text-left p-4 h-auto"
+            onClick={() => window.print()}
+          >
             <div className="font-medium">Download PDF</div>
             <div className="text-sm opacity-75 mt-1">
               Get a printable version of your learning path
@@ -173,6 +201,14 @@ const LearningPathView = ({ profile, learningPath }: LearningPathViewProps) => {
         resources={learningPath.phases.flatMap(phase => phase.resources)}
         learningStyle={profile.learningStyle}
       />
+
+      {/* Career Outcome Preview */}
+      <div className="card">
+        <h2 className="text-xl font-semibold mb-3">Career Outcome Preview</h2>
+        <p className="text-sm text-gray-600">
+          Completing this roadmap prepares you for roles such as Junior Frontend Developer and boosts proficiency across foundational web technologies.
+        </p>
+      </div>
     </div>
   )
 }
