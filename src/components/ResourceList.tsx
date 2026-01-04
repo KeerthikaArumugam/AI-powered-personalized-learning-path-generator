@@ -137,7 +137,7 @@ const ResourceList = ({ resources, learningStyle }: ResourceListProps) => {
 
             {/* Content */}
             <h3 className="font-semibold text-gray-900 mb-2">{resource.title}</h3>
-            <p className="text-sm text-gray-600 mb-3 line-clamp-2">{resource.description}</p>
+            <p className="text-sm text-gray-600 mb-3">{resource.description}</p>
 
             {/* Metadata */}
             <div className="flex items-center justify-between text-xs text-gray-500 mb-3">

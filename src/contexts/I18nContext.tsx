@@ -8,6 +8,8 @@ const dictionaries: Record<Lang, Dict> = {
   en: {
     app_title: 'Learning Path Generator',
     nav_home: 'Home',
+    nav_dashboard: 'Dashboard',
+    nav_roadmaps: 'Roadmaps',
     nav_generator: 'Learning Path',
     nav_library: 'Skill Library',
     nav_results: 'Roadmap Results',
@@ -24,6 +26,8 @@ const dictionaries: Record<Lang, Dict> = {
   es: {
     app_title: 'Generador de Ruta de Aprendizaje',
     nav_home: 'Inicio',
+    nav_dashboard: 'Panel',
+    nav_roadmaps: 'Rutas',
     nav_generator: 'Ruta de Aprendizaje',
     nav_library: 'Biblioteca de Habilidades',
     nav_results: 'Resultados',

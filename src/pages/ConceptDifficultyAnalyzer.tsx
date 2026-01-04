@@ -51,9 +51,27 @@ const analyzeTopics = (topics: string[]): AnalyzedTopic[] => {
 }
 
 const ConceptDifficultyAnalyzer = () => {
-  const [topics, setTopics] = useState<string[]>([])
+  const [topics, setTopics] = useState<string[]>(() => {
+    try {
+      const raw = localStorage.getItem('concept-difficulty-topics')
+      if (raw) {
+        const parsed = JSON.parse(raw)
+        if (Array.isArray(parsed)) return parsed as string[]
+      }
+    } catch {}
+    return []
+  })
   const [newTopic, setNewTopic] = useState('')
-  const [results, setResults] = useState<AnalyzedTopic[]>([])
+  const [results, setResults] = useState<AnalyzedTopic[]>(() => {
+    try {
+      const raw = localStorage.getItem('concept-difficulty-results')
+      if (raw) {
+        const parsed = JSON.parse(raw)
+        if (Array.isArray(parsed)) return parsed as AnalyzedTopic[]
+      }
+    } catch {}
+    return []
+  })
   const [selected, setSelected] = useState<AnalyzedTopic | null>(null)
   const grouped = useMemo(() => {
     return {
@@ -67,16 +85,28 @@ const ConceptDifficultyAnalyzer = () => {
     const v = newTopic.trim()
     if (!v) return
     if (topics.includes(v)) return
-    setTopics([...topics, v])
+    const next = [...topics, v]
+    setTopics(next)
+    try {
+      localStorage.setItem('concept-difficulty-topics', JSON.stringify(next))
+    } catch {}
     setNewTopic('')
   }
 
   const removeTopic = (t: string) => {
-    setTopics(topics.filter(x => x !== t))
+    const next = topics.filter(x => x !== t)
+    setTopics(next)
+    try {
+      localStorage.setItem('concept-difficulty-topics', JSON.stringify(next))
+    } catch {}
   }
 
   const analyze = () => {
-    setResults(analyzeTopics(topics))
+    const analyzed = analyzeTopics(topics)
+    setResults(analyzed)
+    try {
+      localStorage.setItem('concept-difficulty-results', JSON.stringify(analyzed))
+    } catch {}
   }
 
   return (

@@ -69,10 +69,14 @@ const KnowledgeRetentionChecker = ({ learningPath }: { learningPath?: LearningPa
     const correct = r.filter(x => x.correct).length
     const pct = Math.round((correct / quiz.length) * 100)
     setPercentage(pct)
-    const entry = { date: new Date().toISOString().slice(0, 10), pct }
+    const today = new Date().toISOString().slice(0, 10)
+    const entry = { date: today, pct }
     const next = [...history, entry].slice(-12)
     setHistory(next)
     localStorage.setItem('retention-history', JSON.stringify(next))
+    const weakTopics = r.filter(x => !x.correct).map(x => x.topic)
+    const weakSnapshot = { date: today, topics: weakTopics }
+    localStorage.setItem('retention-weak-topics', JSON.stringify(weakSnapshot))
   }
 
   return (
@@ -187,4 +191,3 @@ const KnowledgeRetentionChecker = ({ learningPath }: { learningPath?: LearningPa
 }
 
 export default KnowledgeRetentionChecker
-

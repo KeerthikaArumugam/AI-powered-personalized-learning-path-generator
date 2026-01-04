@@ -9,6 +9,8 @@ import SkillLibraryPage from './pages/SkillLibraryPage'
 import RoadmapResultsPage from './pages/RoadmapResultsPage'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import CareerRoadmapPage from './pages/CareerRoadmapPage'
+import CareerDashboardPage from './pages/CareerDashboardPage'
 const ConceptDifficultyAnalyzer = lazy(() => import('./pages/ConceptDifficultyAnalyzer'))
 const KnowledgeRetentionChecker = lazy(() => import('./pages/KnowledgeRetentionChecker'))
 const AIReflectionFeedback = lazy(() => import('./pages/AIReflectionFeedback'))
@@ -27,6 +29,7 @@ const ProjectBasedLearningMode = lazy(() => import('./pages/ProjectBasedLearning
 const DailyLearningChallenge = lazy(() => import('./pages/DailyLearningChallenge'))
 const ExplainableAIRecommendations = lazy(() => import('./pages/ExplainableAIRecommendations'))
 const CognitiveLoadBalancer = lazy(() => import('./pages/CognitiveLoadBalancer'))
+const VideoLearningHub = lazy(() => import('./pages/VideoLearningHub'))
 
 function App() {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
@@ -38,6 +41,9 @@ function App() {
       <main className="container mx-auto px-4 py-8">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/roadmaps" element={<Home />} />
+          <Route path="/roadmaps/:slug" element={<CareerRoadmapPage />} />
+          <Route path="/dashboard" element={<CareerDashboardPage />} />
           <Route 
             path="/generator" 
             element={
@@ -84,7 +90,22 @@ function App() {
           <Route path="/job-trend" element={<Suspense fallback={<div>Loading...</div>}><JobRoleTrendIndicator /></Suspense>} />
           <Route path="/tool-readiness" element={<Suspense fallback={<div>Loading...</div>}><ToolReadinessMap /></Suspense>} />
           <Route path="/project-mode" element={<Suspense fallback={<div>Loading...</div>}><ProjectBasedLearningMode /></Suspense>} />
-          <Route path="/daily-challenge" element={<Suspense fallback={<div>Loading...</div>}><DailyLearningChallenge /></Suspense>} />
+          <Route
+            path="/daily-challenge"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <DailyLearningChallenge profile={userProfile} learningPath={learningPath} />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/video-hub"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <VideoLearningHub learningPath={learningPath} />
+              </Suspense>
+            }
+          />
           <Route path="/explainable-ai" element={<Suspense fallback={<div>Loading...</div>}><ExplainableAIRecommendations learningPath={learningPath} /></Suspense>} />
           <Route path="/load-balancer" element={<Suspense fallback={<div>Loading...</div>}><CognitiveLoadBalancer /></Suspense>} />
           <Route path="/about" element={<About />} />

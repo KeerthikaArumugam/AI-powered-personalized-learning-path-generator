@@ -15,6 +15,7 @@ const items = [
   { path: '/daily-challenge', title: 'Daily Learning Challenge', desc: 'Daily challenge, time, and streak' },
   { path: '/explainable-ai', title: 'Explainable AI Recommendations', desc: 'Why recommended, dependencies, outcome' },
   { path: '/load-balancer', title: 'Cognitive Load Balancer', desc: 'Distribution, overload warnings, reorder' },
+  { path: '/video-hub', title: 'Video Learning Hub', desc: 'Topic-based video recommendations and player' },
 ]
 
 const LabsHub = () => {
@@ -43,4 +44,3 @@ const LabsHub = () => {
 }
 
 export default LabsHub
-

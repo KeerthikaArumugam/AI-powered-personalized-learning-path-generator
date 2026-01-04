@@ -26,6 +26,8 @@ const Header = () => {
 
   const navItems = [
     { path: '/', label: t('nav_home') },
+    { path: '/dashboard', label: t('nav_dashboard') },
+    { path: '/roadmaps', label: t('nav_roadmaps') },
     { path: '/generator', label: t('nav_generator') },
     { path: '/library', label: t('nav_library') },
     { path: '/results', label: t('nav_results') },
@@ -37,6 +39,11 @@ const Header = () => {
     { path: '/about', label: t('nav_about') },
     { path: '/contact', label: t('nav_contact') },
   ]
+
+  const isActive = (path: string) => {
+    if (path === '/') return location.pathname === '/'
+    return location.pathname === path || location.pathname.startsWith(`${path}/`)
+  }
 
   return (
     <header className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-800">
@@ -55,7 +62,7 @@ const Header = () => {
                 key={path}
                 to={path}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  location.pathname === path
+                  isActive(path)
                     ? 'bg-primary-50 text-primary-700'
                     : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-800'
                 }`}
@@ -100,7 +107,7 @@ const Header = () => {
                 to={path}
                 onClick={() => setIsMobileOpen(false)}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  location.pathname === path
+                  isActive(path)
                     ? 'bg-primary-50 text-primary-700'
                     : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 hover:bg-gray-50 dark:hover:text-white dark:hover:bg-gray-800'
                 }`}

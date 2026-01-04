@@ -8,9 +8,10 @@ interface ProgressDashboardProps {
 
 const ProgressDashboard = ({ profile, learningPath }: ProgressDashboardProps) => {
   const [progress, setProgress] = useState<ProgressRecord | null>(null)
+  const [streak, setStreak] = useState(0)
+  const [retentionSummary, setRetentionSummary] = useState<{ lastDate: string; lastPct: number } | null>(null)
 
   useEffect(() => {
-    // Mock progress data
     if (learningPath) {
       setProgress({
         userId: 'user-1',
@@ -20,6 +21,18 @@ const ProgressDashboard = ({ profile, learningPath }: ProgressDashboardProps) =>
         timeSpent: 180, // 3 hours
         lastActivity: new Date()
       })
+      try {
+        const streakValue = parseInt(localStorage.getItem('daily-streak') || '0', 10)
+        if (!isNaN(streakValue)) setStreak(streakValue)
+      } catch {}
+      try {
+        const rawHistory = localStorage.getItem('retention-history')
+        if (rawHistory) {
+          const parsed: { date: string; pct: number }[] = JSON.parse(rawHistory)
+          const last = parsed[parsed.length - 1]
+          if (last) setRetentionSummary({ lastDate: last.date, lastPct: last.pct })
+        }
+      } catch {}
     }
   }, [learningPath])
 
@@ -176,7 +189,9 @@ const ProgressDashboard = ({ profile, learningPath }: ProgressDashboardProps) =>
             
             <div className="flex items-center justify-between">
               <span className="text-gray-600">Learning Streak</span>
-              <span className="font-medium text-green-600">3 days 🔥</span>
+              <span className="font-medium text-green-600">
+                {streak > 0 ? `${streak} day${streak === 1 ? '' : 's'} 🔥` : 'No active streak'}
+              </span>
             </div>
 
             <div className="flex items-center justify-between">
@@ -185,6 +200,14 @@ const ProgressDashboard = ({ profile, learningPath }: ProgressDashboardProps) =>
                 {Math.round(timeProgressPercentage)}%
               </span>
             </div>
+            {retentionSummary && (
+              <div className="flex items-center justify-between">
+                <span className="text-gray-600">Last retention score</span>
+                <span className="font-medium">
+                  {retentionSummary.lastPct}% on {retentionSummary.lastDate}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
